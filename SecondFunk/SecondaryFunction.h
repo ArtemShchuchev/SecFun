@@ -2,14 +2,25 @@
 
 #include <iostream>
 
+#if __GNUC__ >= 4
+
+#define DYNAMIC_API	__attribute__((visibility("default")))
+#define IMPORT		__attribute__((visibility("hidden")))
+
+#else
+
 #ifdef SecFun_lib_EXPORTS
 #define DYNAMIC_API __declspec(dllexport)
 #else
 #define DYNAMIC_API __declspec(dllimport)
 #endif
 
+#endif
+
 #ifdef _WIN32
 #include <Windows.h>
+#include <io.h>
+#include <fcntl.h>
 /*
 	00 - черный
 	01 - синий
@@ -102,6 +113,4 @@ DYNAMIC_API void consoleCol(const char* color);
 #endif
 
 
-DYNAMIC_API size_t utf8_strlen(std::string_view str);	// ох уж эти кодировки Русского и могучего!
-
-DYNAMIC_API void printHeader(std::string_view str);		// заголовок (std::string_view - std17)
+DYNAMIC_API void printHeader(std::wstring_view str);		// заголовок (std::string_view - std17)
