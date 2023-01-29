@@ -17,15 +17,11 @@ void printHeader(std::wstring_view str)
 	consoleCol(col::cancel);
 }
 
+void consoleCol(COLOR color)
+{
 #ifdef _WIN32
-void consoleCol(WORD color)
-{
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
-
 #elif __GNUC__
-void consoleCol(const char* color)
-{
 	std::wcout << color;
-}
 #endif
+}
