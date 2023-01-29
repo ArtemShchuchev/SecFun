@@ -2,68 +2,10 @@
 
 #include <iostream>
 
-#if __GNUC__ >= 4
-
+#if __GNUC__ >= 4	// Linux
 #define DYNAMIC_API	__attribute__((visibility("default")))
 #define IMPORT		__attribute__((visibility("hidden")))
 
-#else
-
-#ifdef SecFun_lib_EXPORTS
-#define DYNAMIC_API __declspec(dllexport)
-#else
-#define DYNAMIC_API __declspec(dllimport)
-#endif
-
-#endif
-
-#ifdef _WIN32
-#include <Windows.h>
-#include <io.h>
-#include <fcntl.h>
-/*
-	00 - черный
-	01 - синий
-	02 - зеленый
-	03 - голубой
-	04 - красный
-	05 - фиолетовый
-	06 - желтый
-	07 - белый
-	----
-	08 - серый
-	09 - ярк. синий
-	10 - ярк. зеленый
-	11 - ярк. голубой
-	12 - ярк. красный
-	13 - ярк. фиолетовый
-	14 - ярк. желтый
-	15 - ярк. белый
-*/
-namespace col
-{
-	DYNAMIC_API inline constexpr WORD cancel(7);
-
-	DYNAMIC_API inline constexpr WORD black(0);
-	DYNAMIC_API inline constexpr WORD blue(1);
-	DYNAMIC_API inline constexpr WORD green(2);
-	DYNAMIC_API inline constexpr WORD cyan(3);
-	DYNAMIC_API inline constexpr WORD red(4);
-	DYNAMIC_API inline constexpr WORD magenta(5);
-	DYNAMIC_API inline constexpr WORD yellow(6);
-	DYNAMIC_API inline constexpr WORD white(7);
-	DYNAMIC_API inline constexpr WORD br_black(8);
-	DYNAMIC_API inline constexpr WORD br_blue(9);
-	DYNAMIC_API inline constexpr WORD br_green(10);
-	DYNAMIC_API inline constexpr WORD br_cyan(11);
-	DYNAMIC_API inline constexpr WORD br_red(12);
-	DYNAMIC_API inline constexpr WORD br_magenta(13);
-	DYNAMIC_API inline constexpr WORD br_yellow(14);
-	DYNAMIC_API inline constexpr WORD br_white(15);
-}
-DYNAMIC_API void consoleCol(WORD color);
-
-#else
 /*
 Name            FG  BG
 Black           30  40
@@ -110,7 +52,67 @@ namespace col
 	DYNAMIC_API inline const char* br_white("\033[97m");
 }
 DYNAMIC_API void consoleCol(const char* color);
+
+#elif _WIN32		// Windows
+#include <Windows.h>
+#include <io.h>
+#include <fcntl.h>
+
+const int errorsetmodeout = _setmode(_fileno(stdout), _O_U16TEXT);
+const int errorsetmodeinp = _setmode(_fileno(stdin), _O_U16TEXT);
+const int errorsetmodeerr = _setmode(_fileno(stderr), _O_U16TEXT);
+
+#ifdef SecFun_lib_EXPORTS
+	#define DYNAMIC_API __declspec(dllexport)
+#else
+	#define DYNAMIC_API __declspec(dllimport)
+#endif
+
+/*
+	00 - черный
+	01 - синий
+	02 - зеленый
+	03 - голубой
+	04 - красный
+	05 - фиолетовый
+	06 - желтый
+	07 - белый
+	----
+	08 - серый
+	09 - ярк. синий
+	10 - ярк. зеленый
+	11 - ярк. голубой
+	12 - ярк. красный
+	13 - ярк. фиолетовый
+	14 - ярк. желтый
+	15 - ярк. белый
+*/
+namespace col
+{
+	DYNAMIC_API inline constexpr WORD cancel(7);
+
+	DYNAMIC_API inline constexpr WORD black(0);
+	DYNAMIC_API inline constexpr WORD blue(1);
+	DYNAMIC_API inline constexpr WORD green(2);
+	DYNAMIC_API inline constexpr WORD cyan(3);
+	DYNAMIC_API inline constexpr WORD red(4);
+	DYNAMIC_API inline constexpr WORD magenta(5);
+	DYNAMIC_API inline constexpr WORD yellow(6);
+	DYNAMIC_API inline constexpr WORD white(7);
+	DYNAMIC_API inline constexpr WORD br_black(8);
+	DYNAMIC_API inline constexpr WORD br_blue(9);
+	DYNAMIC_API inline constexpr WORD br_green(10);
+	DYNAMIC_API inline constexpr WORD br_cyan(11);
+	DYNAMIC_API inline constexpr WORD br_red(12);
+	DYNAMIC_API inline constexpr WORD br_magenta(13);
+	DYNAMIC_API inline constexpr WORD br_yellow(14);
+	DYNAMIC_API inline constexpr WORD br_white(15);
+}
+DYNAMIC_API void consoleCol(WORD color);
+
+#else
+#error "-= Unknow OS =-"
 #endif
 
 
-DYNAMIC_API void printHeader(std::wstring_view str);		// заголовок (std::string_view - std17)
+DYNAMIC_API void printHeader(std::wstring_view str);	// заголовок (std::string_view - std17)
