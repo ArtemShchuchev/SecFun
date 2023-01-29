@@ -8,7 +8,7 @@
 	#define DYNAMIC_API	__attribute__((visibility("default")))
 	#define IMPORT		__attribute__((visibility("hidden")))
 #else
-	#define DYNAMIC_API ""
+	#define DYNAMIC_API
 #endif COMPILE_LIBRARY
 
 using COLOR = const char*;
@@ -74,7 +74,7 @@ const int errorsetmodeerr = _setmode(_fileno(stderr), _O_U16TEXT);
 		#define DYNAMIC_API __declspec(dllimport)
 	#endif SecFun_lib_EXPORTS
 #else
-	#define DYNAMIC_API ""
+	#define DYNAMIC_API
 #endif COMPILE_LIBRARY
 
 using COLOR = WORD;
