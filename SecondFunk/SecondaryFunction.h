@@ -9,7 +9,7 @@
 	#define IMPORT		__attribute__((visibility("hidden")))
 #else
 	#define DYNAMIC_API
-#endif COMPILE_LIBRARY
+#endif //COMPILE_LIBRARY
 
 using COLOR = const char*;
 /*
