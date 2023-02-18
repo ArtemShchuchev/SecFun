@@ -1,6 +1,5 @@
 #include "SecondaryFunction.h"
-/*
-*/
+
 #if _WIN32		// Windows
 const int errorsetmodeout = _setmode(_fileno(stdout), _O_U16TEXT);
 const int errorsetmodeinp = _setmode(_fileno(stdin), _O_U16TEXT);
