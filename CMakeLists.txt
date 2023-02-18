@@ -6,13 +6,6 @@ set(SOURCES SecondFunk/SecondaryFunction.cpp)
 
 add_library(${PROJECT_NAME}_lib SHARED ${HEADERS} ${SOURCES})
 
-#add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
-
-#target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
-
-#set(CMAKE_CXX_FLAGS_RELEASE_INIT "-Wall")
-set(CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
-
 # if (Visual Studio)
 # настраиваю в качестве запускаемого проекта
 # настройка на стандарт с++17
