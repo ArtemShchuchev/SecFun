@@ -34,10 +34,16 @@ void printHeader(std::wstring_view str)
 }
 
 // Convert an ANSI string to a wide Unicode String
-std::wstring ansi2unicode(std::string_view str)
+std::wstring ansi2unicode(const std::string& str)
 {
+#ifdef _WIN32
 	int size_needed = MultiByteToWideChar(CP_ACP, 0, &str[0], (int)str.size(), NULL, 0);
 	std::wstring wstrTo(size_needed, 0);
 	MultiByteToWideChar(CP_ACP, 0, &str[0], (int)str.size(), &wstrTo[0], size_needed);
 	return wstrTo;
+#elif __GNUC__
+	// convert UTF-8 string to wstring
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+    return myconv.from_bytes(str);
+#endif
 }

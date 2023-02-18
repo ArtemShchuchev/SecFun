@@ -4,6 +4,9 @@
 #define COMPILE_LIBRARY
 
 #if __GNUC__ >= 4	// Linux
+#include <codecvt>
+#include <locale>
+
 #ifdef COMPILE_LIBRARY
 	#define DYNAMIC_API	__attribute__((visibility("default")))
 	#define IMPORT		__attribute__((visibility("hidden")))
@@ -38,24 +41,24 @@ Bright White    97  107
 */
 namespace col
 {
-	inline COLOR cancel("\033[0m");
+	const COLOR cancel("\033[0m");
 
-	inline COLOR black("\033[30m");
-	inline COLOR red("\033[31m");
-	inline COLOR green("\033[32m");
-	inline COLOR yellow("\033[33m");
-	inline COLOR blue("\033[34m");
-	inline COLOR magenta("\033[35m");
-	inline COLOR cyan("\033[36m");
-	inline COLOR white("\033[37m");
-	inline COLOR br_black("\033[90m");
-	inline COLOR br_red("\033[91m");
-	inline COLOR br_green("\033[92m");
-	inline COLOR br_yellow("\033[93m");
-	inline COLOR br_blue("\033[94m");
-	inline COLOR br_magenta("\033[95m");
-	inline COLOR br_cyan("\033[96m");
-	inline COLOR br_white("\033[97m");
+	const COLOR black("\033[30m");
+	const COLOR red("\033[31m");
+	const COLOR green("\033[32m");
+	const COLOR yellow("\033[33m");
+	const COLOR blue("\033[34m");
+	const COLOR magenta("\033[35m");
+	const COLOR cyan("\033[36m");
+	const COLOR white("\033[37m");
+	const COLOR br_black("\033[90m");
+	const COLOR br_red("\033[91m");
+	const COLOR br_green("\033[92m");
+	const COLOR br_yellow("\033[93m");
+	const COLOR br_blue("\033[94m");
+	const COLOR br_magenta("\033[95m");
+	const COLOR br_cyan("\033[96m");
+	const COLOR br_white("\033[97m");
 }
 
 #elif _WIN32		// Windows
@@ -130,4 +133,4 @@ DYNAMIC_API void consoleCol(COLOR color);
 DYNAMIC_API void printHeader(std::wstring_view str);
 
 // Convert an ANSI string to a wide Unicode String
-DYNAMIC_API std::wstring ansi2unicode(std::string_view str);
+DYNAMIC_API std::wstring ansi2unicode(const std::string& str);
