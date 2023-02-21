@@ -96,7 +96,7 @@ DYNAMIC_API std::wstring ansi2unicode(const std::string&);
 DYNAMIC_API std::string utf8_encode(const std::wstring& wstr);
 
 // Convert an UTF8 string to a wide Unicode String
-std::wstring utf8_decode(const std::string& str);
+DYNAMIC_API std::wstring utf8_decode(const std::string& str);
 
 // Convert an wide Unicode string to ANSI string
-std::string unicode2ansi(const std::wstring& wstr);
+DYNAMIC_API std::string unicode2ansi(const std::wstring& wstr);
