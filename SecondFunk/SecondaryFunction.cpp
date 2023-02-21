@@ -58,9 +58,6 @@ std::string utf8_encode(const std::wstring& wstr)
 	return strTo;
 }
 
-/*
-
-
 // Convert an UTF8 string to a wide Unicode String
 std::wstring utf8_decode(const std::string &str)
 {
@@ -78,4 +75,3 @@ std::string unicode2ansi(const std::wstring &wstr)
 	WideCharToMultiByte(CP_ACP, 0, &wstr[0], (int)wstr.size(), &strTo[0], size_needed, NULL, NULL);
 	return strTo;
 }
-*/
