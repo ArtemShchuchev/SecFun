@@ -84,10 +84,25 @@ namespace col
 #endif
 
 // цвет в консоли
-DYNAMIC_API void consoleCol(COLOR);
+DYNAMIC_API void setConsoleCol(COLOR);
 
-// заголовок (std::string_view - std17)
-DYNAMIC_API void printHeader(std::wstring_view);
+// получение текущего положения курсора
+DYNAMIC_API COORD getConsolePos();
+
+// установка положения курсора
+DYNAMIC_API void setConsolePos(const COORD);
+
+// заголовок
+DYNAMIC_API void printHeader(const std::wstring&);
 
 // Convert an ANSI string to a wide Unicode String
-DYNAMIC_API std::wstring ansi2unicode(const std::string&);
+DYNAMIC_API std::wstring ansi2wide(const std::string&);
+
+// Convert an UTF8 string to a wide Unicode String
+DYNAMIC_API std::wstring utf2wide(const std::string&);
+
+// Convert a wide Unicode string to an UTF8 string
+DYNAMIC_API std::string wide2utf(const std::wstring&);
+
+// Convert an wide Unicode string to ANSI string
+DYNAMIC_API std::string wide2ansi(const std::wstring&);
